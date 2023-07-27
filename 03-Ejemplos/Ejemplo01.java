@@ -2,7 +2,6 @@
 public class Ejemplo01{
 	public static void main(String[] args) {
 		
-		// Instrucion de salida
 		byte edad = 18;
 		short turno = 938;
 		int total_vendido = 2500000;
@@ -24,8 +23,6 @@ public class Ejemplo01{
 		System.out.println("PI: "+pi);
 		System.out.println("Bandera: "+bandera);
 		System.out.println("Letra: "+letra);
-		System.out.println("Saludo: "+saludo);		
-
-		
+		System.out.println("Saludo: "+saludo);
 	}
 }
