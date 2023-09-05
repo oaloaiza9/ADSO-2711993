@@ -8,7 +8,7 @@ public class Ejemplo01{
 
 		// Creando arreglos vacios.
 		int listaEdades [] = new int [10];
-
+		
 		// Agregar/Modificar datos en el arreglo
 		listaEdades[0] = 25;
 		listaEdades[1] = 30;
