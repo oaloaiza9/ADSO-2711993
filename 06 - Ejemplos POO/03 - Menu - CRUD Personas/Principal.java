@@ -15,25 +15,30 @@ public class Principal{
 		int indice = 0;
 
 		while(opcion!=11){
-			System.out.println("+----------------------------+");
-			System.out.println("|            MENU            |");
-			System.out.println("+----------------------------+");
-			System.out.println("|  1. Crear Persona.         |");
-			System.out.println("|  2. Listar Personas.       |");
-			System.out.println("|  3. Editar Persona.        |");
-			System.out.println("|  4. Eliminar Persona.      |");
-			System.out.println("|  5. Persona mas Alta.      |");
-			System.out.println("|  6. Persona mas Baja.      |");
-			System.out.println("|  7. Persona mas Pesada.    |");
-			System.out.println("|  8. Persona menos Pesada.  |");
-			System.out.println("|  9. Promedio de Altura.    |");
-			System.out.println("| 10. Promedio de Peso.      |");
-			System.out.println("| 11. Salir.                 |");
-			System.out.println("+----------------------------+");
+			try {new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();} catch (Exception e) {System.out.println(e.getMessage());}
+			System.out.println("\n  +----------------------------+");
+			System.out.println("  |            MENU            |");
+			System.out.println("  +----------------------------+");
+			System.out.println("  |  1. Crear Persona.         |");
+			System.out.println("  |  2. Listar Personas.       |");
+			System.out.println("  |  3. Editar Persona.        |");
+			System.out.println("  |  4. Eliminar Persona.      |");
+			System.out.println("  |  5. Persona mas Alta.      |");
+			System.out.println("  |  6. Persona mas Baja.      |");
+			System.out.println("  |  7. Persona mas Pesada.    |");
+			System.out.println("  |  8. Persona menos Pesada.  |");
+			System.out.println("  |  9. Promedio de Altura.    |");
+			System.out.println("  | 10. Promedio de Peso.      |");
+			System.out.println("  | 11. Salir.                 |");
+			System.out.println("  +----------------------------+");
 			System.out.print("  => Ingrese una opcion: ");
 			opcion = entradaNumero.nextInt();
 
 			if(opcion==1){
+				System.out.println("\n  +----------------------------+");
+				System.out.println("  |        NUEVA PERSONA       |");
+				System.out.println("  +----------------------------+");
+
 				// Solicitar los datos al usuario
 				System.out.print("  => Ingrese Cedula: ");
 				int cedula = entradaNumero.nextInt();
@@ -60,10 +65,12 @@ public class Principal{
 				indice++;
 			}else if(opcion==2){
 
+				System.out.println("\n  +----------------------------+");
+				System.out.println("  |      LISTA DE PERSONAS     |");
+				System.out.println("  +----------------------------+");
 				for (int i=0; i<indice; i++) {
-					System.out.println( (i+1)+" => "+listado[i].detallePersona() );
+					System.out.println("  "+(i+1)+" => "+listado[i].detallePersona() );
 				}
-
 			}else if(opcion==3){
 
 			}else if(opcion==4){
@@ -83,11 +90,13 @@ public class Principal{
 			}else if(opcion==11){
 
 			}else{
-				System.out.println("+----------------------------+");
-				System.out.println("|       OPCION INVALIDA      |");
-				System.out.println("+----------------------------+");
-				System.out.println("\n");
+				System.out.println("\n  +----------------------------+");
+				System.out.println("  |       OPCION INVALIDA      |");
+				System.out.println("  +----------------------------+");
 			}
+
+			System.out.print("\n  Presiona Enter para continuar...");
+			String pause = entradaTexto.nextLine();
 		}
 		
 	}
