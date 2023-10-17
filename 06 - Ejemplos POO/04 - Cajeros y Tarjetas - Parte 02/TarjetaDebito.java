@@ -62,8 +62,32 @@ public class TarjetaDebito{
 				break;
 			}
 		}
-
+		
 		ultimas_transacciones[indice] = texto;
+	}
+
+	public boolean retirarDinero(int monto, String password){
+		// Validar que la clave ingresada sea la de la tarjeta
+		if ( clave.equals(password) ) {
+			// Validar que el monto solicitado este dentro del rango permitido en la Tarjeta
+			if ( monto <= permitido_retirar ) {
+				// Validar que el monto solicitado este disponible en la Tarjeta
+				if ( monto <= dinero_disponible ) {
+					dinero_disponible -= monto;
+					registrarTransaccion("RETIRO", monto, "OK");
+					return true;
+				}else{
+					registrarTransaccion("RETIRO", monto, "ERROR - FONDOS INSUFICIENTES");
+					return false;
+				}
+			}else{
+				registrarTransaccion("RETIRO", monto, "ERROR - MONTO EXCEDE VALOR MAXIMO PERMITIDO");
+				return false;
+			}
+		}else{
+			registrarTransaccion("RETIRO", monto, "ERROR - CLAVE");
+			return false;
+		}	
 	}
 
 

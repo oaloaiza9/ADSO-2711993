@@ -82,4 +82,22 @@ public class CajeroElectronico{
 		}
 	}
 
+	public void retirarDineroTarjeta( TarjetaDebito tarjeta, int monto, String password ){
+		// Validar que el monto solicitado este disponible en el Cajero
+		if ( monto <= dinero_disponible ) {
+			boolean proceso = tarjeta.retirarDinero( monto, password );
+			if ( proceso ) {
+				// REDUCIR EL DINERO DENTRO DEL CAJERO
+				// TENIENDO EN CUENTA LAS CANTIDADES DE BILLETES
+				System.out.println("------- PROCESO DE RETIRO REALIZADO CON EXITO   --------");
+			}else{
+				System.out.println("------- ERROR - EL RETIRO NO SE PUDO REALIZAR ------");
+			}
+		}else{
+			System.out.println("------- ERROR - EL CAJERO NO CUENTA CON EL MONTO SOLICITADO ------");
+		}
+
+	}
+
+
 }
