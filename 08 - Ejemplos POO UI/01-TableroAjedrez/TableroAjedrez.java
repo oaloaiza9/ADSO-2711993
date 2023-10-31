@@ -35,14 +35,14 @@ public class TableroAjedrez extends JFrame{
 			}
 		}
 
-		tablero[0][0].setText("TB");
-		tablero[1][0].setText("CB");
-		tablero[2][0].setText("AB");
-		tablero[3][0].setText("RYB");
+		tablero[0][0].setText("TN");
+		tablero[1][0].setText("CN");
+		tablero[2][0].setText("AN");
+		tablero[3][0].setText("RYN");
 		tablero[4][0].setText("RNN");
-		tablero[5][0].setText("AB");
-		tablero[6][0].setText("CB");
-		tablero[7][0].setText("TB");
+		tablero[5][0].setText("AN");
+		tablero[6][0].setText("CN");
+		tablero[7][0].setText("TN");
 		for (int i=0; i<tablero.length; i++) {
 			tablero[i][1].setText("PN");
 		}
@@ -51,7 +51,7 @@ public class TableroAjedrez extends JFrame{
 		tablero[0][7].setText("TB");
 		tablero[1][7].setText("CB");
 		tablero[2][7].setText("AB");
-		tablero[3][7].setText("RNN");
+		tablero[3][7].setText("RNB");
 		tablero[4][7].setText("RYB");
 		tablero[5][7].setText("AB");
 		tablero[6][7].setText("CB");
