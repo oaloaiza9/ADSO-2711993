@@ -1,0 +1,41 @@
+
+Clientes existentes:
+	108800
+	108801
+	108802
+	108803
+	108804
+
+Vendedores existentes:
+	109900
+	109901
+	109902
+	109903
+	109904
+
+Productos existentes:
+	1010
+	1011
+	1012
+	1013
+	1014
+
+
+
+KeyListener eventoKey = new KeyListener(){
+    public void keyPressed(KeyEvent e){
+    }
+
+    public void keyReleased(KeyEvent e){
+        // Aca viene el codigo del
+        // Algoritmo que quieran que se realice al 
+        // Presional una tecla
+    }
+
+    public void keyTyped(KeyEvent e){
+    }
+};
+
+
+input.addKeyListener( eventoKey );
+
