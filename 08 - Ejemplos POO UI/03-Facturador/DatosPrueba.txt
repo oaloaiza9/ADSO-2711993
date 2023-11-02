@@ -21,21 +21,30 @@ Productos existentes:
 	1014
 
 
-
-KeyListener eventoKey = new KeyListener(){
-    public void keyPressed(KeyEvent e){
-    }
-
-    public void keyReleased(KeyEvent e){
-        // Aca viene el codigo del
-        // Algoritmo que quieran que se realice al 
-        // Presional una tecla
-    }
-
-    public void keyTyped(KeyEvent e){
-    }
-};
+||------------------------------------------------------------------||
+|| Codigo de ejemplo para poner el icono en la Ventana              ||
+||------------------------------------------------------------------||
+	setIconImage(getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono.png") ));
 
 
-input.addKeyListener( eventoKey );
+
+||------------------------------------------------------------------||
+|| Codigo de ejemplo para agregar evento de Teclado                 ||
+||------------------------------------------------------------------||
+
+	KeyListener eventoKey = new KeyListener(){
+	    public void keyPressed(KeyEvent e){
+	    }
+
+	    public void keyReleased(KeyEvent e){
+	        // Aca viene el codigo del
+	        // Algoritmo que quieran que se realice al 
+	        // Presional una tecla
+	    }
+
+	    public void keyTyped(KeyEvent e){
+	    }
+	};
+
+	ObjetoJTextField.addKeyListener( eventoKey );
 
