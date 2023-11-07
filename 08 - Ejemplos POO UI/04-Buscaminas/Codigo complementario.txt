@@ -1,0 +1,8 @@
+
+Image img_blanco = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_espacio.png"));
+img_blanco = img_blanco.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+
+this.tablero[i][j] = new JButton();
+this.tablero[i][j].setIcon( new ImageIcon(img_blanco) );
+this.tablero[i][j].setFocusable(false);
+
