@@ -1,10 +1,15 @@
 package principal;
 
 import java.awt.Color;
+import java.awt.Image;
 import utils.Persona;
 import java.util.Vector;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
+import utils.ButtonEditor;
+import utils.ButtonRenderer;
 
 public class TablaBotones extends javax.swing.JFrame {
     
@@ -31,6 +36,13 @@ public class TablaBotones extends javax.swing.JFrame {
         setIconImage( getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono_registro.png") ) );
         
         modelo = (DefaultTableModel) tablaDatos.getModel();
+        
+        tablaDatos.getColumnModel().getColumn(5).setCellEditor( new ButtonEditor(new JCheckBox()) );
+        tablaDatos.getColumnModel().getColumn(5).setCellRenderer( new ButtonRenderer() );
+        
+        tablaDatos.getColumnModel().getColumn(6).setCellEditor( new ButtonEditor(new JCheckBox()) );
+        tablaDatos.getColumnModel().getColumn(6).setCellRenderer( new ButtonRenderer() );
+        
     }
     
     public void imprimirPersonas(){
@@ -44,8 +56,17 @@ public class TablaBotones extends javax.swing.JFrame {
             
             JButton btnEditar = new JButton();
             btnEditar.setBackground(Color.WHITE);
+            Image icono_editar = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_editar.png"));
+            icono_editar = icono_editar.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+            btnEditar.setIcon(new ImageIcon(icono_editar) );
             
-            Object dato[] = new Object[]{ documento, nombres, apellidos, telefono, correo };
+            JButton btnEliminar = new JButton();
+            btnEliminar.setBackground(Color.WHITE);
+            Image icono_eliminar = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_eliminar.png"));
+            icono_eliminar = icono_eliminar.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+            btnEliminar.setIcon(new ImageIcon(icono_eliminar));
+            
+            Object dato[] = new Object[]{ documento, nombres, apellidos, telefono, correo, btnEditar, btnEliminar};
             modelo.addRow(dato);
         }
     }

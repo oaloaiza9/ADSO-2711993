@@ -1,0 +1,18 @@
+// Habilitar Render de Botones
+tablaDatos.getColumnModel().getColumn(x).setCellRenderer(new ButtonRenderer());
+tablaDatos.getColumnModel().getColumn(x).setCellEditor(new ButtonEditor(new JCheckBox()));
+
+// Ancho de Columna
+tablaDatos.getColumnModel().getColumn(x).setPreferredWidth(XX);
+
+// Centrar contendido Columnas
+DefaultTableCellRenderer centerRender = new DefaultTableCellRenderer();
+centerRender.setHorizontalAlignment(SwingConstants.CENTER);
+tablaDatos.getColumnModel().getColumn(x).setCellRenderer(centerRender);
+
+// Deshabilitar Ajuste de Ancho de Columnas
+tablaDatos.getTableHeader().setResizingAllowed(false);
+tablaDatos.getTableHeader().setReorderingAllowed(false);
+
+// Definir Ancho de Filas
+tablaDatos.setRowHeight(XX);
