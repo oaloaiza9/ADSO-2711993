@@ -4,7 +4,13 @@ import utils.Persona;
 
 public class FormularioEdicion extends javax.swing.JFrame {
     
-    public FormularioEdicion() {
+    TablaBotones ventana;
+    int posicion;
+    
+    public FormularioEdicion(TablaBotones ventana, int posicion) {
+        this.ventana = ventana;
+        this.posicion = posicion;
+        
         initComponents();
         initAlternComponents();
     }
@@ -14,6 +20,12 @@ public class FormularioEdicion extends javax.swing.JFrame {
         setVisible(true);
         setLocationRelativeTo(null);
         setIconImage( getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono_registro.png") ) );
+        
+        campoDocumento.setText( ventana.listaPersonas[posicion].getDocumento() );
+        campoNombres.setText( ventana.listaPersonas[posicion].getNombres() );
+        campoApellidos.setText( ventana.listaPersonas[posicion].getApellidos());
+        campoTelefono.setText( ventana.listaPersonas[posicion].getTelefono());
+        campoCorreo.setText( ventana.listaPersonas[posicion].getCorreo());
     }
     
     @SuppressWarnings("unchecked")
@@ -189,7 +201,13 @@ public class FormularioEdicion extends javax.swing.JFrame {
         if( documento.equals("") || nombres.equals("") || apellidos.equals("") || telefono.equals("") || correo.equals("") ){
             Alerta ventana = new Alerta("Todos los campos son Obligatorios.");
         }else{
-            
+            ventana.listaPersonas[posicion].setDocumento( documento );
+            ventana.listaPersonas[posicion].setNombres( nombres );
+            ventana.listaPersonas[posicion].setApellidos( apellidos );
+            ventana.listaPersonas[posicion].setTelefono( telefono );
+            ventana.listaPersonas[posicion].setCorreo( correo );
+            ventana.imprimirPersonas();
+            dispose();
         }
 
     }//GEN-LAST:event_btnAgregarActionPerformed

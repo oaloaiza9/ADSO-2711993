@@ -19,9 +19,9 @@ public class Alerta extends javax.swing.JFrame {
         
         setIconImage( getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono_warning.png") ) );
         
-        Image imagen = getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono_warning.png") );
-        imagen = imagen.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-        etqImagen.setIcon(new ImageIcon(imagen));
+        Image img_warning = getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono_warning.png") );
+        img_warning = img_warning.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        etqImagen.setIcon(new ImageIcon(img_warning));
             
         etqTexto.setText(texto);
     }

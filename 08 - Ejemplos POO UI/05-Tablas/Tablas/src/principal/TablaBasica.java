@@ -2,6 +2,8 @@ package principal;
 
 import utils.Persona;
 import java.util.Vector;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class TablaBasica extends javax.swing.JFrame {
@@ -10,7 +12,7 @@ public class TablaBasica extends javax.swing.JFrame {
     Persona listaPersonas[];
     
     public TablaBasica() {
-        listaPersonas = new Persona[100];
+        listaPersonas = new Persona[5];
         listaPersonas[0] = new Persona("108800", "Oscar", "Loaiza", "3333330", "oscar@mail.com");
         listaPersonas[1] = new Persona("108801", "Daniel", "Garcia", "3333331", "daniel@mail.com");
         listaPersonas[2] = new Persona("108802", "Juan", "Lopez", "3333332", "juan@mail.com");
@@ -29,11 +31,31 @@ public class TablaBasica extends javax.swing.JFrame {
         setIconImage( getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono_registro.png") ) );
         
         modelo = (DefaultTableModel) tablaDatos.getModel();
+        
+        // Tamaño de Columnas
+        tablaDatos.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tablaDatos.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tablaDatos.getColumnModel().getColumn(2).setPreferredWidth(150);
+        tablaDatos.getColumnModel().getColumn(3).setPreferredWidth(50);
+        tablaDatos.getColumnModel().getColumn(4).setPreferredWidth(150);
+        
+        // Ajuste del Orden y Ancho de Columnas
+        tablaDatos.getTableHeader().setReorderingAllowed(false);
+        tablaDatos.getTableHeader().setResizingAllowed(false);
+        
+        // Centrar contenido de columnas
+        DefaultTableCellRenderer centerRender = new DefaultTableCellRenderer();
+        centerRender.setHorizontalAlignment(SwingConstants.CENTER);
+        tablaDatos.getColumnModel().getColumn(0).setCellRenderer(centerRender);
+        tablaDatos.getColumnModel().getColumn(3).setCellRenderer(centerRender);
+        
+        // Alto de las filas
+        tablaDatos.setRowHeight(20);
     }
     
     public void imprimirPersonas(){
         modelo.setRowCount(0);
-        for (int i=0; listaPersonas[i]!=null; i++) {
+        for (int i=0;i<listaPersonas.length && listaPersonas[i]!=null; i++) {
             String documento = listaPersonas[i].getDocumento();
             String nombres = listaPersonas[i].getNombres();
             String apellidos = listaPersonas[i].getApellidos();
@@ -98,17 +120,27 @@ public class TablaBasica extends javax.swing.JFrame {
         etqDocumento.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         etqDocumento.setText("Documento:");
 
+        campoDocumento.setMargin(new java.awt.Insets(2, 10, 2, 10));
+
         etqNombres.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         etqNombres.setText("Nombres:");
+
+        campoNombres.setMargin(new java.awt.Insets(2, 10, 2, 10));
 
         etqApellidos.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         etqApellidos.setText("Apellidos:");
 
+        campoApellidos.setMargin(new java.awt.Insets(2, 10, 2, 10));
+
         etqTelefono.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         etqTelefono.setText("Telefono:");
 
+        campoTelefono.setMargin(new java.awt.Insets(2, 10, 2, 10));
+
         etqCorreo.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         etqCorreo.setText("Correo Elec.:");
+
+        campoCorreo.setMargin(new java.awt.Insets(2, 10, 2, 10));
 
         btnAgregar.setBackground(new java.awt.Color(0, 153, 0));
         btnAgregar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -270,8 +302,16 @@ public class TablaBasica extends javax.swing.JFrame {
                 }
             }
             
+            boolean valido = true;
+            for (int i=0;i<listaPersonas.length && listaPersonas[i]!=null; i++) {
+                if (listaPersonas[i].getDocumento().equalsIgnoreCase(documento) || listaPersonas[i].getCorreo().equalsIgnoreCase(correo) ) {
+                    valido = false;
+                    break;
+                }
+            }
+            
             // Crear objeto en posicion vacia
-            if (posicion!=-1) {
+            if (posicion!=-1 && valido) {
                 listaPersonas[posicion] = new Persona(documento, nombres, apellidos, telefono, correo);
                 
                 Object data[] = new Object[]{ documento, nombres, apellidos, telefono, correo };
@@ -283,6 +323,12 @@ public class TablaBasica extends javax.swing.JFrame {
                 campoTelefono.setText("");
                 campoCorreo.setText("");
                 campoDocumento.requestFocus();
+            }else{
+                if (posicion==-1) {
+                    Alerta ventana = new Alerta("No se dispone de memoria.");
+                }else if(!valido){
+                    Alerta ventana = new Alerta("El documeto o el correo se repiten.");
+                }
             }
         }
         

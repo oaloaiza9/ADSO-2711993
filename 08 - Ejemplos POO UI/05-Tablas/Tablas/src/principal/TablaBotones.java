@@ -9,6 +9,8 @@ import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import utils.ButtonEditor;
 import utils.ButtonRenderer;
@@ -32,71 +34,83 @@ public class TablaBotones extends javax.swing.JFrame {
     }
     
     public void initAternComponents(){
-        setTitle("Tabla Botones");
+        setTitle("Tabla Basica");
         setLocationRelativeTo(null);
         setVisible(true);
         setIconImage( getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono_registro.png") ) );
         
         modelo = (DefaultTableModel) tablaDatos.getModel();
         
-        tablaDatos.getColumnModel().getColumn(5).setCellEditor( new ButtonEditor(new JCheckBox()) );
-        tablaDatos.getColumnModel().getColumn(5).setCellRenderer( new ButtonRenderer() );
+        tablaDatos.getColumnModel().getColumn(5).setCellEditor(new ButtonEditor(new JCheckBox()));
+        tablaDatos.getColumnModel().getColumn(5).setCellRenderer(new ButtonRenderer());
         
-        tablaDatos.getColumnModel().getColumn(6).setCellEditor( new ButtonEditor(new JCheckBox()) );
-        tablaDatos.getColumnModel().getColumn(6).setCellRenderer( new ButtonRenderer() );
+        tablaDatos.getColumnModel().getColumn(6).setCellEditor(new ButtonEditor(new JCheckBox()));
+        tablaDatos.getColumnModel().getColumn(6).setCellRenderer(new ButtonRenderer());
         
-        tablaDatos.setRowHeight(30);
-        
-        tablaDatos.getColumnModel().getColumn(0).setPreferredWidth(80);
-        tablaDatos.getColumnModel().getColumn(1).setPreferredWidth(140);
-        tablaDatos.getColumnModel().getColumn(2).setPreferredWidth(140);
+        // Tamaño de Columnas
+        tablaDatos.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tablaDatos.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tablaDatos.getColumnModel().getColumn(2).setPreferredWidth(150);
         tablaDatos.getColumnModel().getColumn(3).setPreferredWidth(50);
-        tablaDatos.getColumnModel().getColumn(4).setPreferredWidth(140);
-        tablaDatos.getColumnModel().getColumn(5).setPreferredWidth(20);
-        tablaDatos.getColumnModel().getColumn(6).setPreferredWidth(20);
+        tablaDatos.getColumnModel().getColumn(4).setPreferredWidth(150);
+        tablaDatos.getColumnModel().getColumn(5).setPreferredWidth(10);
+        tablaDatos.getColumnModel().getColumn(6).setPreferredWidth(10);
+        
+        // Ajuste del Orden y Ancho de Columnas
+        tablaDatos.getTableHeader().setReorderingAllowed(false);
+        tablaDatos.getTableHeader().setResizingAllowed(false);
+        
+        // Centrar contenido de columnas
+        DefaultTableCellRenderer centerRender = new DefaultTableCellRenderer();
+        centerRender.setHorizontalAlignment(SwingConstants.CENTER);
+        tablaDatos.getColumnModel().getColumn(0).setCellRenderer(centerRender);
+        tablaDatos.getColumnModel().getColumn(3).setCellRenderer(centerRender);
+        
+        // Alto de las filas
+        tablaDatos.setRowHeight(25);
     }
     
-    public void imprimirPersonas(){
-        modelo.setRowCount(0);
-        for (int i=0; listaPersonas[i]!=null; i++) {
-            String documento = listaPersonas[i].getDocumento();
-            String nombres = listaPersonas[i].getNombres();
-            String apellidos = listaPersonas[i].getApellidos();
-            String telefono = listaPersonas[i].getTelefono();
-            String correo = listaPersonas[i].getCorreo();
-            
-            JButton btnEditar = new JButton();
-            btnEditar.setBackground(Color.WHITE);
-            Image icono_editar = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_editar.png"));
-            icono_editar = icono_editar.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
-            btnEditar.setIcon(new ImageIcon(icono_editar) );
-            
-            JButton btnEliminar = new JButton();
-            btnEliminar.setBackground(Color.WHITE);
-            Image icono_eliminar = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_eliminar.png"));
-            icono_eliminar = icono_eliminar.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
-            btnEliminar.setIcon(new ImageIcon(icono_eliminar));
-            
-            Object dato[] = new Object[]{ documento, nombres, apellidos, telefono, correo, btnEditar, btnEliminar};
-            modelo.addRow(dato);
-            
-            btnEditar.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    System.out.println("Editar: "+nombres+" "+apellidos);
-                    FormularioEdicion ventana = new FormularioEdicion();
-                }
-            });
-            
-            btnEliminar.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    System.out.println("Eliminar a: "+nombres+" "+apellidos);
-                    EliminarPersona ventana = new EliminarPersona();
-                }
-            });
+        public void imprimirPersonas(){
+            modelo.setRowCount(0);
+            for (int i=0;i<listaPersonas.length && listaPersonas[i]!=null; i++) {
+                String documento = listaPersonas[i].getDocumento();
+                String nombres = listaPersonas[i].getNombres();
+                String apellidos = listaPersonas[i].getApellidos();
+                String telefono = listaPersonas[i].getTelefono();
+                String correo = listaPersonas[i].getCorreo();
+
+                JButton btnEditar = new JButton();
+                btnEditar.setBackground(Color.white);
+                Image icono_editar = getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono_editar.png") );
+                icono_editar = icono_editar.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+                btnEditar.setIcon( new ImageIcon(icono_editar) );
+
+                JButton btnEliminar = new JButton();
+                btnEliminar.setBackground(Color.white);
+                Image icono_eliminar = getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono_eliminar.png") );
+                icono_eliminar = icono_eliminar.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+                btnEliminar.setIcon( new ImageIcon(icono_eliminar) );
+
+                Object dato[] = new Object[]{ documento, nombres, apellidos, telefono, correo, btnEditar, btnEliminar };
+                modelo.addRow(dato);
+
+                TablaBotones ventanaActual = this;
+                final int posicion = i;
+                btnEditar.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        FormularioEdicion ventana = new FormularioEdicion( ventanaActual, posicion );
+                    }
+                });
+
+                btnEliminar.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        EliminarPersona ventana = new EliminarPersona( ventanaActual, posicion );
+                    }
+                });
+            }
         }
-    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -121,7 +135,6 @@ public class TablaBotones extends javax.swing.JFrame {
         tablaDatos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Tabla Botones");
 
         contenedorTitulo.setBackground(new java.awt.Color(0, 51, 153));
 
@@ -152,17 +165,27 @@ public class TablaBotones extends javax.swing.JFrame {
         etqDocumento.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         etqDocumento.setText("Documento:");
 
+        campoDocumento.setMargin(new java.awt.Insets(2, 10, 2, 10));
+
         etqNombres.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         etqNombres.setText("Nombres:");
+
+        campoNombres.setMargin(new java.awt.Insets(2, 10, 2, 10));
 
         etqApellidos.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         etqApellidos.setText("Apellidos:");
 
+        campoApellidos.setMargin(new java.awt.Insets(2, 10, 2, 10));
+
         etqTelefono.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         etqTelefono.setText("Telefono:");
 
+        campoTelefono.setMargin(new java.awt.Insets(2, 10, 2, 10));
+
         etqCorreo.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         etqCorreo.setText("Correo Elec.:");
+
+        campoCorreo.setMargin(new java.awt.Insets(2, 10, 2, 10));
 
         btnAgregar.setBackground(new java.awt.Color(0, 153, 0));
         btnAgregar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -324,10 +347,20 @@ public class TablaBotones extends javax.swing.JFrame {
                 }
             }
             
+            boolean valido = true;
+            for (int i=0;i<listaPersonas.length && listaPersonas[i]!=null; i++) {
+                if (listaPersonas[i].getDocumento().equalsIgnoreCase(documento) || listaPersonas[i].getCorreo().equalsIgnoreCase(correo) ) {
+                    valido = false;
+                    break;
+                }
+            }
+            
             // Crear objeto en posicion vacia
-            if (posicion!=-1) {
+            if (posicion!=-1 && valido) {
                 listaPersonas[posicion] = new Persona(documento, nombres, apellidos, telefono, correo);
-                imprimirPersonas();
+                
+                Object data[] = new Object[]{ documento, nombres, apellidos, telefono, correo };
+                modelo.addRow(data);
 
                 campoDocumento.setText("");
                 campoNombres.setText("");
@@ -335,6 +368,12 @@ public class TablaBotones extends javax.swing.JFrame {
                 campoTelefono.setText("");
                 campoCorreo.setText("");
                 campoDocumento.requestFocus();
+            }else{
+                if (posicion==-1) {
+                    Alerta ventana = new Alerta("No se dispone de memoria.");
+                }else if(!valido){
+                    Alerta ventana = new Alerta("El documeto o el correo se repiten.");
+                }
             }
         }
         
