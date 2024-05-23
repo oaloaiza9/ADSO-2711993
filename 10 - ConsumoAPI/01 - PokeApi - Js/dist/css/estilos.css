@@ -1,0 +1,32 @@
+.vh-25{
+	height: 25vh;
+}
+
+.vh-35{
+	height: 35vh;
+}
+
+.vh-70{
+	height: 70vh;
+}
+
+.vh-80{
+	height: 80vh;
+}
+
+.pstn-rltv{
+	position: relative;
+}
+
+.waitContent{
+	position:absolute;
+	top: 0px;
+	background:#FFFFFF;
+	width: 100%;
+	height: 100%;
+	padding-top:250px;
+}
+
+.font-3rem{
+	font-size: 3rem;
+}

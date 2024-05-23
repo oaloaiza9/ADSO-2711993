@@ -1,0 +1,11 @@
+| -------------------------------------------------|
+| ----------  TEXTO A OBJETO JSON  ----------------|
+| -------------------------------------------------|
+
+	JsonObject variable = JsonParser.parseString( texto ).getAsJsonObject();
+
+| -------------------------------------------------|
+| ----------  TEXTO A ARREGLO JSON  ---------------|
+| -------------------------------------------------|
+
+	JsonArray variable = JsonParser.parseString( texto ).getAsJsonArray();
